@@ -18,6 +18,6 @@ func init() {
 	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInputPlug) })
 }
 
-//func (t *SampleInputPlug) Init(config interface{}) error {
-//	return nil
-//}
+func (t *SampleInputPlug) Init(config interface{}) error {
+	return nil
+}
