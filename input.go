@@ -47,9 +47,11 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 	for {
 		sr.SplitStream(file, nil)
 		fmt.Printf("%s\n", "run")
-		if msg := <-t.stopMsg; msg != nil {
+		select {
+		case <-t.stopMsg:
 			fmt.Println("Runner get the Stop Message")
 			return nil
+		default:
 		}
 	}
 	return nil
