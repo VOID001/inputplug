@@ -32,6 +32,7 @@ func (t *SampleInputPlug) Init(config interface{}) error {
 func (t *SampleInputPlug) Stop() {
 	fmt.Println("Stop Plugin")
 	t.stopMsg <- struct{}{}
+	close(t.stopMsg)
 	return
 }
 
