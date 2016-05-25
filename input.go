@@ -45,10 +45,7 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 	sr := ir.NewSplitterRunner("")
 	//Send it to heka pipeline
 	for {
-		err = sr.SplitStream(file, nil)
-		if err != nil {
-
-		}
+		sr.SplitStream(file, nil)
 		fmt.Printf("%s\n", "run")
 		if msg := <-t.stopMsg; msg != nil {
 			fmt.Println("Runner get the Stop Message")
