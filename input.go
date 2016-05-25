@@ -42,13 +42,11 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 	}
 	file, _ := os.Open(t.filePath)
 	sr := ir.NewSplitterRunner("")
-	for {
-		sr.SplitStream(file, nil)
-		var stop interface{}
-		if stop = <-t.stopMsg; stop != nil {
-			break
-		}
-		fmt.Printf("%s\n", stop)
+	go sr.SplitStream(file, nil)
+	var stop interface{}
+	if stop = <-t.stopMsg; stop != nil {
+		return
 	}
+	fmt.Printf("%s\n", stop)
 	return nil
 }
