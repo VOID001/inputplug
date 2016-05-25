@@ -32,7 +32,6 @@ func (t *SampleInputPlug) Init(config interface{}) error {
 func (t *SampleInputPlug) Stop() {
 	fmt.Println("Stop Plugin")
 	t.stopMsg <- struct{}{}
-	close(t.stopMsg)
 	return
 }
 
@@ -49,6 +48,9 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 			fmt.Println(err.Error())
 		}
 		fmt.Printf("%s\n", "run")
+		if msg := <-t.stopMsg; msg != nil {
+			return nil
+		}
 	}
 	return nil
 }
