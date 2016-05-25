@@ -13,6 +13,11 @@ type SampleInput struct {
 type SampleInputConfig struct {
 }
 
+func init() {
+	fmt.Println("Init VOID001's Plugin Done")
+	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInput) })
+}
+
 func (t *SampleInput) Init(config interface{}) error {
 	fmt.Println("Init VOID001's Plugin Done")
 	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInput) })
