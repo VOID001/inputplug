@@ -38,8 +38,8 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 		return fmt.Errorf("Open File %s error: %s", t.filePath, err.Error())
 	}
 	file, _ := os.Open(t.filePath)
+	sr := ir.NewSplitterRunner("")
 	for {
-		sr := ir.NewSplitterRunner("")
 		sr.SplitStream(file, nil)
 	}
 	return nil
