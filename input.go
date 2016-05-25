@@ -26,6 +26,7 @@ func (t *SampleInputPlug) Init(config interface{}) error {
 		return errors.New("Now 'filepath' supported")
 	}
 	fmt.Println("Init Complete")
+	t.stopMsg = make(chan interface{})
 	return nil
 }
 
@@ -42,10 +43,11 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 	}
 	file, _ := os.Open(t.filePath)
 	sr := ir.NewSplitterRunner("")
+	//Send it to heka pipeline
 	for {
 		err = sr.SplitStream(file, nil)
 		if err != nil {
-			fmt.Println(err.Error())
+
 		}
 		fmt.Printf("%s\n", "run")
 		if msg := <-t.stopMsg; msg != nil {
