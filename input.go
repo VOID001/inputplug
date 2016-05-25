@@ -15,6 +15,6 @@ type SampleInputPluginConfig struct {
 
 func (t *SampleInputPlugin) Init(config interface{}) error {
 	fmt.Println("Init VOID001's Plugin Done")
-	pipeline.RegisterPlugin("SampleInputPlugin", func() interface{} { return new(SampleInputPlugin) })
+	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInputPlugin) })
 	return nil
 }
