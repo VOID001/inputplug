@@ -29,6 +29,7 @@ func (t *SampleInputPlug) Init(config interface{}) error {
 }
 
 func (t *SampleInputPlug) Stop() {
+	fmt.Println("Stop Called")
 	return
 }
 
