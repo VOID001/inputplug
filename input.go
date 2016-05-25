@@ -49,6 +49,7 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 		}
 		fmt.Printf("%s\n", "run")
 		if msg := <-t.stopMsg; msg != nil {
+			fmt.Println("Runner get the Stop Message")
 			return nil
 		}
 	}
