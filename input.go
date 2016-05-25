@@ -10,6 +10,7 @@ import (
 type SampleInputPlug struct {
 	filePath string
 	config   *SampleInputConfig
+	stopMsg  chan interface{}
 }
 
 type SampleInputConfig struct{}
@@ -29,7 +30,8 @@ func (t *SampleInputPlug) Init(config interface{}) error {
 }
 
 func (t *SampleInputPlug) Stop() {
-	fmt.Println("Stop Called")
+	fmt.Println("Stop Plugin")
+	t.stopMsg <- struct{}{}
 	return
 }
 
@@ -42,6 +44,9 @@ func (t *SampleInputPlug) Run(ir pipeline.InputRunner, h pipeline.PluginHelper) 
 	sr := ir.NewSplitterRunner("")
 	for {
 		sr.SplitStream(file, nil)
+		if stop := <-t.stopMsg; stop != nil {
+			break
+		}
 	}
 	return nil
 }
