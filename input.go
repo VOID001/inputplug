@@ -5,7 +5,7 @@ import (
 	"github.com/mozilla-services/heka/pipeline"
 )
 
-type SampleInput struct {
+type SampleInputPlug struct {
 	filePath string
 	config   *SampleInputConfig
 }
@@ -15,11 +15,9 @@ type SampleInputConfig struct {
 
 func init() {
 	fmt.Println("Init VOID001's Plugin Done")
-	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInput) })
+	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInputPlug) })
 }
 
-func (t *SampleInput) Init(config interface{}) error {
-	fmt.Println("Init VOID001's Plugin Done")
-	pipeline.RegisterPlugin("SampleInput", func() interface{} { return new(SampleInput) })
-	return nil
-}
+//func (t *SampleInputPlug) Init(config interface{}) error {
+//	return nil
+//}
